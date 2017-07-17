@@ -1,0 +1,10 @@
+module.js:487
+    throw err;
+    ^
+
+Error: Cannot find module '/Users/xzhang/shell/stdnode/adlsdlk.js'
+    at Function.Module._resolveFilename (module.js:485:15)
+    at Function.Module._load (module.js:437:25)
+    at Function.Module.runMain (module.js:605:10)
+    at startup (bootstrap_node.js:158:16)
+    at bootstrap_node.js:575:3

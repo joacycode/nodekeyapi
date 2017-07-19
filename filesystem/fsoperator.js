@@ -28,10 +28,10 @@ fs.open('./writefile.txt', 'a', (err, fd) => {
         // fs.write() @params(文件描述，指定读出的缓存，读取缓存开始位置，读取长度|null默认长度，写入文件开始位置|null上次位置,回调函数)
         // callback() @params(错误对象，实际长度，被读取缓存的对象)
         fs.write(fd, buff, 0, null, null, (err, written, buffer) => {
-            if (err) console.log("写文件失败");
-            console.log("写文件成功", written, buffer);
-            fs.fsync(fd, err => { if (err) console.log("fsync错误：" + err) });
-            fs.close(fd, err => { if (err) console.log("close错误：" + err) });
+            if (err) console.log('写文件失败');
+            console.log('写文件成功', written, buffer);
+            fs.fsync(fd, err => { if (err) console.log('fsync错误：' + err) });
+            fs.close(fd, err => { if (err) console.log('close错误：' + err) });
         });
     }
 });
@@ -85,11 +85,11 @@ fs.readFile('./sample.png', 'base64', (err, data) => {
  * fs.mkdir(path,[mode],callback) callback @params(错误对象)
  * fs.readdir(path,callback) callback @params(错误对象, 所有文件名)
  */
-fs.mkdir("./test/childfile", err => {
+fs.mkdir('./test/childfile', err => {
     if (err) console.log(err);
-    console.log("创建目录成功");
+    console.log('创建目录成功');
 });
-fs.readdir("./", (err, files) => {
+fs.readdir('./', (err, files) => {
     if (err) console.log(err);
     console.log(files);
 });
@@ -109,14 +109,14 @@ fs.readdir("./", (err, files) => {
  * @property mtime 修改时间
  * @property ctime 创建时间
  */
-fs.stat("./test", (err, stats) => {
+fs.stat('./test', (err, stats) => {
     if (!err) console.log(stats);
 });
 
 /*
  * 检查文件目录是否存在
  */
-fs.exists("./message", exists => {
+fs.exists('./message', exists => {
     console.log(exists);
 });
 
@@ -128,7 +128,7 @@ fs.exists("./message", exists => {
  * callback @params err错误对象
  * callback @params resolvePath文件或者目录的绝对路径
  */
-fs.realpath("./test/childfile", (err, resolvePath) => {
+fs.realpath('./test/childfile', (err, resolvePath) => {
     if (err) throw err;
     console.log(resolvePath);
 });
@@ -141,9 +141,9 @@ fs.realpath("./test/childfile", (err, resolvePath) => {
  * @params mtime 指定修改后的修改时间
  * @params fd 使用open方法打开后返回的文件描述
  */
-fs.utimes("./test/childfile", new Date(), new Date(), err => {
+fs.utimes('./test/childfile', new Date(), new Date(), err => {
     if (err) throw err;
-    console.log("修改文件时间成功~");
+    console.log('修改文件时间成功~');
 });
 
 /*
@@ -156,9 +156,9 @@ fs.utimes("./test/childfile", new Date(), new Date(), err => {
  * 0+ r=4 w=2 x=1 
  * user group other
  */
-fs.chmod("./test", 0740, err => {
+fs.chmod('./test', 0740, err => {
     if (err) throw err;
-    console.log("文件权限修改成功!");
+    console.log('文件权限修改成功!');
 });
 
 /*
@@ -166,9 +166,9 @@ fs.chmod("./test", 0740, err => {
  * fs.rename(oldpath,newpath,callback)
  * callback @params err 错误对象
  */
-fs.rename("./readfile.txt", "./test/childfile/newfile.txt", err => {
-    if (err) throw new Error("移动失败" + err);
-    console.log("移动文件成功");
+fs.rename('./readfile.txt', './test/childfile/newfile.txt', err => {
+    if (err) throw new Error('移动失败' + err);
+    console.log('移动文件成功');
 });
 
 /*
@@ -179,13 +179,13 @@ fs.rename("./readfile.txt", "./test/childfile/newfile.txt", err => {
  * @params distpath 创建硬链接目标
  * callback @params err 错误对象
  */
-fs.link("./writefile.txt", "./test/childfile/link2.txt", err => {
+fs.link('./writefile.txt', './test/childfile/link2.txt', err => {
     if (err) throw err;
-    console.log("创建硬链接成功");
+    console.log('创建硬链接成功');
 });
-fs.unlink("./symlink", err => {
+fs.unlink('./symlink', err => {
     if (err) throw err;
-    console.log("删除硬链接成功");
+    console.log('删除硬链接成功');
 });
 
 /*
@@ -195,9 +195,9 @@ fs.unlink("./symlink", err => {
  * @params srcpath 创建符号链接源
  * @params distpath 创建符号链接源
  */
-fs.symlink("./test", "./symlink", err => {
+fs.symlink('./test', './symlink', err => {
     if (err) throw err;
-    console.log("创建符号链接成功");
+    console.log('创建符号链接成功');
 });
 
 /*
@@ -207,10 +207,10 @@ fs.symlink("./test", "./symlink", err => {
  * callback @params err 错误对象
  * callback @params linkString [String] 另一个文件的目录、文件名
  */
-fs.symlink("./srclink.txt", "./symlink.txt", err => {
+fs.symlink('./srclink.txt', './symlink.txt', err => {
     if (err) throw err;
-    console.log("创建符号链接symlink.txt成功");
-    fs.readlink("./symlink.txt", (err, linkString) => {
+    console.log('创建符号链接symlink.txt成功');
+    fs.readlink('./symlink.txt', (err, linkString) => {
         if (err) throw err;
         console.log(linkString);
     });
@@ -225,9 +225,9 @@ fs.symlink("./srclink.txt", "./symlink.txt", err => {
  * @params fd open方法打开返回的文件描述
  * callback @params err 错误对象
  */
-fs.truncate("./truncate.txt", 30, err => {
+fs.truncate('./truncate.txt', 30, err => {
     if (err) throw err;
-    fs.stat("./truncate.txt", (err, stats) => {
+    fs.stat('./truncate.txt', (err, stats) => {
         if (err) throw err;
         console.log(stats.size);
     });
@@ -237,9 +237,9 @@ fs.truncate("./truncate.txt", 30, err => {
  * 删除空目录
  *  fs.rmdir(path,callback)
  */
-fs.rmdir("./rmdir", err => {
+fs.rmdir('./rmdir', err => {
     if (err) throw err;
-    console.log("删除目录成功");
+    console.log('删除目录成功');
 });
 
 /*
@@ -254,23 +254,23 @@ fs.rmdir("./rmdir", err => {
  * listener @params curr 修改后的文件fs.Stats对象
  * listener @params prev 修改前的文件fs.Stats对象
  */
-fs.watchFile("./readfile.txt", (curr, prev) => {
+fs.watchFile('./readfile.txt', (curr, prev) => {
     if (Date.parse(prev.ctime) === 0) {
-        console.log("文件被创建~");
+        console.log('文件被创建~');
     } else if (Date.parse(curr.ctime) === 0) {
-        console.log("文件被删除~");
+        console.log('文件被删除~');
     } else if (Date.parse(curr.mtime) !== Date.parse(prev.mtime)) {
-        console.log("文件被修改");
+        console.log('文件被修改');
     }
 });
 
 
 // 监听另一方法 fs.watch(filename,[options],callback)
 // callback(event,filename)
-// @params event = "rename" 移动删除重命名 || "change"内容改动
+// @params event = 'rename' 移动删除重命名 || 'change'内容改动
 // @params filename 指定目录中发生改动的文件完整路径以及文件名
 
-let watcher = fs.watch("./test/", (event, filename) => {
+let watcher = fs.watch('./test/', (event, filename) => {
     console.log(event, filename);
 });
 watcher.close(); //停止监听
@@ -297,26 +297,26 @@ watcher.close(); //停止监听
  * @method unpipe 取消pipe方法设置的通道
  * @method unshift 取消解析器绑定 流数据采用其他方式解析
  */
-let rfile = fs.createReadStream("./writefile.txt", { start: 0, end: 20 });
+let rfile = fs.createReadStream('./writefile.txt', { start: 0, end: 20 });
 rfile.pause();
 setTimeout(() => {
     rfile.resume();
 }, 1000);
 rfile.resume();
-rfile.on("open", fd => {
-    console.log("开始读取文件");
+rfile.on('open', fd => {
+    console.log('开始读取文件');
 });
-rfile.on("data", data => {
-    console.log("读取到数据：" + data);
+rfile.on('data', data => {
+    console.log('读取到数据：' + data);
 });
-rfile.on("end", () => {
-    console.log("文件全部读取完毕");
+rfile.on('end', () => {
+    console.log('文件全部读取完毕');
 });
-rfile.on("close", () => {
-    console.log("文件被关闭");
+rfile.on('close', () => {
+    console.log('文件被关闭');
 });
-rfile.on("error", err => {
-    console.log("读取文件失败" + err);
+rfile.on('error', err => {
+    console.log('读取文件失败' + err);
 });
 
 /*
@@ -338,9 +338,9 @@ rfile.on("error", err => {
  * * * * * @return 表示操作系统缓存是否未满 还可以写入数据
  * @method end 当没有数据再被写入流中调用
  */
-let writable = fs.createWriteStream("./writefile.txt", { flags: 'a', encoding: 'utf8' });
-let flag = writable.write("create node stream txt\r\n", "utf8", () => {
-    console.log("write写入成功");
+let writable = fs.createWriteStream('./writefile.txt', { flags: 'a', encoding: 'utf8' });
+let flag = writable.write('create node stream txt\r\n', 'utf8', () => {
+    console.log('write写入成功');
 });
 console.log(flag); //true || false
 
@@ -382,13 +382,13 @@ let path_resolve = path.resolve('/foo', 'bar', '/bar/img', '../img/imgage.png');
 let path_relative = path.relative('/data/orandea/test/aaa', '/data/orandea/impl/bbb');
 
 // /data/orandea/test/aaa
-let path_dirname = path.dirname("/data/orandea/test/aaa/img.gif");
+let path_dirname = path.dirname('/data/orandea/test/aaa/img.gif');
 
 //  img.gif
-let path_basename = path.basename("/data/orandea/test/aaa/img.gif");
+let path_basename = path.basename('/data/orandea/test/aaa/img.gif');
 
 //  .gif
-let path_extname = path.extname("/data/orandea/test/aaa/img.gif");
+let path_extname = path.extname('/data/orandea/test/aaa/img.gif');
 
 /* 
  * { 
@@ -399,7 +399,7 @@ let path_extname = path.extname("/data/orandea/test/aaa/img.gif");
  *  name: 'img' 
  * }
  */
-let path_parse = path.parse("/data/orandea/test/aaa/img.gif");
+let path_parse = path.parse('/data/orandea/test/aaa/img.gif');
 
 // /data/orandea/test/aaa/img.gif
 let path_format = path.format({

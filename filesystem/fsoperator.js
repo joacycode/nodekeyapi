@@ -3,96 +3,96 @@ const path = require('path');
 /*
  * 打开文件-读取
  */
-// fs.open('./readfile.txt', 'r', (err, fd) => {
-//     if (err) {
-//         console.log('发生错误: ' + err);
-//     } else {
-//         let buff = Buffer.allocUnsafe(255);
-//         // fs.read() @params(文件描述，指定读入的缓存，写入缓存开始位置，写入长度，读取文件开始位置,回调函数)
-//         // callback() @params(错误对象，实际长度，被读取缓存的对象)
-//         fs.read(fd, buff, 0, 28, 0, (err, bytesRead, buffer) => {
-//             let newBuff = buffer.slice(0, bytesRead).toString();
-//             console.log(bytesRead, newBuff);
-//         });
-//     }
-// })
+fs.open('./readfile.txt', 'r', (err, fd) => {
+    if (err) {
+        console.log('发生错误: ' + err);
+    } else {
+        let buff = Buffer.allocUnsafe(255);
+        // fs.read() @params(文件描述，指定读入的缓存，写入缓存开始位置，写入长度，读取文件开始位置,回调函数)
+        // callback() @params(错误对象，实际长度，被读取缓存的对象)
+        fs.read(fd, buff, 0, 28, 0, (err, bytesRead, buffer) => {
+            let newBuff = buffer.slice(0, bytesRead).toString();
+            console.log(bytesRead, newBuff);
+        });
+    }
+});
 
 /*
  * 打开文件-写入'w'、追加'a'
  */
-// fs.open('./writefile.txt', 'a', (err, fd) => {
-//     if (err) {
-//         console.log('发生错误: ' + err);
-//     } else {
-//         let buff = Buffer.from('打开后写入：nodeJs博大精深~\r\n');
-//         // fs.write() @params(文件描述，指定读出的缓存，读取缓存开始位置，读取长度|null默认长度，写入文件开始位置|null上次位置,回调函数)
-//         // callback() @params(错误对象，实际长度，被读取缓存的对象)
-//         fs.write(fd, buff, 0, null, null, (err, written, buffer) => {
-//             if (err) console.log("写文件失败");
-//             console.log("写文件成功", written, buffer);
-//             fs.fsync(fd, err => { if (err) console.log("fsync错误：" + err) });
-//             fs.close(fd, err => { if (err) console.log("close错误：" + err) });
-//         });
-//     }
-// });
+fs.open('./writefile.txt', 'a', (err, fd) => {
+    if (err) {
+        console.log('发生错误: ' + err);
+    } else {
+        let buff = Buffer.from('打开后写入：nodeJs博大精深~\r\n');
+        // fs.write() @params(文件描述，指定读出的缓存，读取缓存开始位置，读取长度|null默认长度，写入文件开始位置|null上次位置,回调函数)
+        // callback() @params(错误对象，实际长度，被读取缓存的对象)
+        fs.write(fd, buff, 0, null, null, (err, written, buffer) => {
+            if (err) console.log("写文件失败");
+            console.log("写文件成功", written, buffer);
+            fs.fsync(fd, err => { if (err) console.log("fsync错误：" + err) });
+            fs.close(fd, err => { if (err) console.log("close错误：" + err) });
+        });
+    }
+});
 
 /*
  * 读、写文件
  */
-// const buff = Buffer.from('nodejs博大精深');
-// const addStr = Buffer.from('\r\n这是追加的内容@#$%');
-// let options = {
-//     flag: 'a+',
-//     encoding: 'utf8',
-//     mode: '0666'
-// };
+const buff = Buffer.from('nodejs博大精深');
+const addStr = Buffer.from('\r\n这是追加的内容@#$%');
+let options = {
+    flag: 'a+',
+    encoding: 'utf8',
+    mode: '0666'
+};
 
-// fs.readFile('./readfile.txt', 'utf8', (err, data) => {
-//     if (err) {
-//         console.log('发生错误: ' + err);
-//     } else {
-//         console.log('开始读取内容: ' + data);
-//     }
-// });
+fs.readFile('./readfile.txt', 'utf8', (err, data) => {
+    if (err) {
+        console.log('发生错误: ' + err);
+    } else {
+        console.log('开始读取内容: ' + data);
+    }
+});
 
-// fs.writeFile('./writefile.txt', addStr, options, function(err) {
-//     if (err) {
-//         console.log('发生错误: ' + err);
-//     } else {
-//         console.log('写文件成功');
-//     }
-// });
+fs.writeFile('./writefile.txt', addStr, options, function(err) {
+    if (err) {
+        console.log('发生错误: ' + err);
+    } else {
+        console.log('写文件成功');
+    }
+});
 
 /*
  * 图片文件读写
  */
-// fs.readFile('./sample.png','base64',(err,data)=>{
-// 	if (err){
-// 		console.log('读文件发生错误: '+err);
-// 	} else {
-// 		fs.writeFile('./copy.jpg',data.toString(),'base64',(err)=>{
-// 			if(err){
-// 				console.log('写文件发生错误: '+err);
-// 			} else {
-// 				console.log('写文件成功');
-// 			}
-// 		});
-// 	}
-// });
+fs.readFile('./sample.png', 'base64', (err, data) => {
+    if (err) {
+        console.log('读文件发生错误: ' + err);
+    } else {
+        fs.writeFile('./copy.jpg', data.toString(), 'base64', (err) => {
+            if (err) {
+                console.log('写文件发生错误: ' + err);
+            } else {
+                console.log('写文件成功');
+            }
+        });
+    }
+});
 
 /*
  * 创建读取目录
  * fs.mkdir(path,[mode],callback) callback @params(错误对象)
  * fs.readdir(path,callback) callback @params(错误对象, 所有文件名)
  */
-// fs.mkdir("./test/childfile", err => {
-//     if (err) console.log(err);
-//     console.log("创建目录成功");
-// });
-// fs.readdir("./", (err, files) => {
-//     if (err) console.log(err);
-//     console.log(files);
-// });
+fs.mkdir("./test/childfile", err => {
+    if (err) console.log(err);
+    console.log("创建目录成功");
+});
+fs.readdir("./", (err, files) => {
+    if (err) console.log(err);
+    console.log(files);
+});
 
 /*
  * 查看文件目录信息
@@ -109,16 +109,16 @@ const path = require('path');
  * @property mtime 修改时间
  * @property ctime 创建时间
  */
-// fs.stat("./test", (err, stats) => {
-//     if (!err) console.log(stats);
-// });
+fs.stat("./test", (err, stats) => {
+    if (!err) console.log(stats);
+});
 
 /*
  * 检查文件目录是否存在
  */
-// fs.exists("./message", exists => {
-//     console.log(exists);
-// });
+fs.exists("./message", exists => {
+    console.log(exists);
+});
 
 /*
  * 获取文件目录绝对路径
@@ -128,10 +128,10 @@ const path = require('path');
  * callback @params err错误对象
  * callback @params resolvePath文件或者目录的绝对路径
  */
-// fs.realpath("./test/childfile", (err, resolvePath) => {
-//     if (err) throw err;
-//     console.log(resolvePath);
-// });
+fs.realpath("./test/childfile", (err, resolvePath) => {
+    if (err) throw err;
+    console.log(resolvePath);
+});
 
 /*
  * 修改文件目录访问修改时间
@@ -141,10 +141,10 @@ const path = require('path');
  * @params mtime 指定修改后的修改时间
  * @params fd 使用open方法打开后返回的文件描述
  */
-// fs.utimes("./test/childfile", new Date(), new Date(), err => {
-//     if (err) throw err;
-//     console.log("修改文件时间成功~");
-// });
+fs.utimes("./test/childfile", new Date(), new Date(), err => {
+    if (err) throw err;
+    console.log("修改文件时间成功~");
+});
 
 /*
  * 修改文件目录的访问权限
@@ -156,20 +156,20 @@ const path = require('path');
  * 0+ r=4 w=2 x=1 
  * user group other
  */
-// fs.chmod("./test", 0740, err => {
-//     if (err) throw err;
-//     console.log("文件权限修改成功!");
-// });
+fs.chmod("./test", 0740, err => {
+    if (err) throw err;
+    console.log("文件权限修改成功!");
+});
 
 /*
  * 移动文件、目录
  * fs.rename(oldpath,newpath,callback)
  * callback @params err 错误对象
  */
-// fs.rename("./readfile.txt", "./test/childfile/newfile.txt", err => {
-//     if (err) throw new Error("移动失败" + err);
-//     console.log("移动文件成功");
-// });
+fs.rename("./readfile.txt", "./test/childfile/newfile.txt", err => {
+    if (err) throw new Error("移动失败" + err);
+    console.log("移动文件成功");
+});
 
 /*
  * 创建删除文件[硬链接] 不同文件名指向同一文件
@@ -179,14 +179,14 @@ const path = require('path');
  * @params distpath 创建硬链接目标
  * callback @params err 错误对象
  */
-// fs.link("./writefile.txt", "./test/childfile/link2.txt", err => {
-//     if (err) throw err;
-//     console.log("创建硬链接成功");
-// });
-// fs.unlink("./symlink", err => {
-//     if (err) throw err;
-//     console.log("删除硬链接成功");
-// });
+fs.link("./writefile.txt", "./test/childfile/link2.txt", err => {
+    if (err) throw err;
+    console.log("创建硬链接成功");
+});
+fs.unlink("./symlink", err => {
+    if (err) throw err;
+    console.log("删除硬链接成功");
+});
 
 /*
  * 创建查看[符号链接] 创建替身 打开符号链接自动指向源
@@ -195,10 +195,10 @@ const path = require('path');
  * @params srcpath 创建符号链接源
  * @params distpath 创建符号链接源
  */
-// fs.symlink("./test", "./symlink", err => {
-//     if (err) throw err;
-//     console.log("创建符号链接成功");
-// });
+fs.symlink("./test", "./symlink", err => {
+    if (err) throw err;
+    console.log("创建符号链接成功");
+});
 
 /*
  * 读取符号链接中包含另一个文件的目录、文件名
@@ -207,14 +207,14 @@ const path = require('path');
  * callback @params err 错误对象
  * callback @params linkString [String] 另一个文件的目录、文件名
  */
-// fs.symlink("./srclink.txt", "./symlink.txt", err => {
-//     if (err) throw err;
-//     console.log("创建符号链接symlink.txt成功");
-//     fs.readlink("./symlink.txt", (err, linkString) => {
-//         if (err) throw err;
-//         console.log(linkString);
-//     });
-// });
+fs.symlink("./srclink.txt", "./symlink.txt", err => {
+    if (err) throw err;
+    console.log("创建符号链接symlink.txt成功");
+    fs.readlink("./symlink.txt", (err, linkString) => {
+        if (err) throw err;
+        console.log(linkString);
+    });
+});
 
 /*
  * 截断文件 修改文件大小
@@ -225,22 +225,22 @@ const path = require('path');
  * @params fd open方法打开返回的文件描述
  * callback @params err 错误对象
  */
-// fs.truncate("./truncate.txt", 30, err => {
-//     if (err) throw err;
-//     fs.stat("./truncate.txt", (err, stats) => {
-//         if (err) throw err;
-//         console.log(stats.size);
-//     });
-// });
+fs.truncate("./truncate.txt", 30, err => {
+    if (err) throw err;
+    fs.stat("./truncate.txt", (err, stats) => {
+        if (err) throw err;
+        console.log(stats.size);
+    });
+});
 
 /*
  * 删除空目录
  *  fs.rmdir(path,callback)
  */
-// fs.rmdir("./rmdir", err => {
-//     if (err) throw err;
-//     console.log("删除目录成功");
-// });
+fs.rmdir("./rmdir", err => {
+    if (err) throw err;
+    console.log("删除目录成功");
+});
 
 /*
  * 监视文件、目录 、取消监视
@@ -254,15 +254,15 @@ const path = require('path');
  * listener @params curr 修改后的文件fs.Stats对象
  * listener @params prev 修改前的文件fs.Stats对象
  */
-// fs.watchFile("./readfile.txt", (curr, prev) => {
-//     if (Date.parse(prev.ctime) === 0) {
-//         console.log("文件被创建~");
-//     } else if (Date.parse(curr.ctime) === 0) {
-//         console.log("文件被删除~");
-//     } else if (Date.parse(curr.mtime) !== Date.parse(prev.mtime)) {
-//         console.log("文件被修改");
-//     }
-// });
+fs.watchFile("./readfile.txt", (curr, prev) => {
+    if (Date.parse(prev.ctime) === 0) {
+        console.log("文件被创建~");
+    } else if (Date.parse(curr.ctime) === 0) {
+        console.log("文件被删除~");
+    } else if (Date.parse(curr.mtime) !== Date.parse(prev.mtime)) {
+        console.log("文件被修改");
+    }
+});
 
 
 // 监听另一方法 fs.watch(filename,[options],callback)
@@ -270,10 +270,11 @@ const path = require('path');
 // @params event = "rename" 移动删除重命名 || "change"内容改动
 // @params filename 指定目录中发生改动的文件完整路径以及文件名
 
-// let watcher = fs.watch("./test/", (event, filename) => {
-//     console.log(event, filename);
-// });
-// watcher.close(); //停止监听
+let watcher = fs.watch("./test/", (event, filename) => {
+    console.log(event, filename);
+});
+watcher.close(); //停止监听
+
 
 /*
  * 文件流 ReadStream
@@ -296,7 +297,27 @@ const path = require('path');
  * @method unpipe 取消pipe方法设置的通道
  * @method unshift 取消解析器绑定 流数据采用其他方式解析
  */
-
+let rfile = fs.createReadStream("./writefile.txt", { start: 0, end: 20 });
+rfile.pause();
+setTimeout(() => {
+    rfile.resume();
+}, 1000);
+rfile.resume();
+rfile.on("open", fd => {
+    console.log("开始读取文件");
+});
+rfile.on("data", data => {
+    console.log("读取到数据：" + data);
+});
+rfile.on("end", () => {
+    console.log("文件全部读取完毕");
+});
+rfile.on("close", () => {
+    console.log("文件被关闭");
+});
+rfile.on("error", err => {
+    console.log("读取文件失败" + err);
+});
 
 /*
  * 文件流 WriteStream
@@ -310,10 +331,18 @@ const path = require('path');
  * @event pipe  读取数据的对象的pipe方法被触发时候
  * @event unpipe 读取数据的对象的unpipe方法被触发时候
  * @event error 当读取数据过程中发生错误
- * @method write 用于写入数据
+ * @method write(chunk,[encoding],[callback]) 用于写入数据 
+ * * * * * @params chunk 要写入的的数据 Buffer或String
+ * * * * * @params encoding 指定编码写入
+ * * * * * @params callback 写入完毕回调 无参数
+ * * * * * @return 表示操作系统缓存是否未满 还可以写入数据
  * @method end 当没有数据再被写入流中调用
  */
-
+let writable = fs.createWriteStream("./writefile.txt", { flags: 'a', encoding: 'utf8' });
+let flag = writable.write("create node stream txt\r\n", "utf8", () => {
+    console.log("write写入成功");
+});
+console.log(flag); //true || false
 
 
 /*

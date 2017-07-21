@@ -94,17 +94,21 @@
  * HTTP IncomingMessage类
  * IncomingMessage对象由 http.Server或http.ClientRequest创建，并作为第一个参数分别递给 'request' 和 'response' 事件，它可以用来访问响应状态、消息头、以及数据
  * 
- * @event
- * @event
- * @event
+ * @event aborted 
+ * @event close
+ * 
  * @method destory([error]) 调用接收到 IncomingMessage的socket上的destroy()方法
- * @method
- * @method
+ * @method setTimeout(msecs, callback)
+ * 
  * @property headers 请求头或响应头的对象 头信息的名称与值的键值对 头信息的名称为小写
  * @property httpVersion 返回客户端发送http的版本 （1.0、1.1）
- * @property method 该属性只读，表示请求的方法
- * @property rawHeaders 接收到的原始的请求头或响应头列表
- * @property
+ * @property method @return [string] 该属性只读，表示请求的方法
+ * @property rawHeaders @return [array] 接收到的原始的请求头或响应头列表，键和值在同一个列表中，偶数位的是键，奇数位的是对应的值
+ * @property url 返回请求的 URL 字符串,仅包含实际 HTTP 请求中的 URL
+ * @property trailers 返回 Trailer 请求头或响应头对象
+ * @property statusMessage HTTP响应状态消息
+ * @property statusCode HTTP响应状态码
+ * @property socket
  */
 
 

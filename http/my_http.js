@@ -19,6 +19,8 @@ let server = http.createServer((request, response) => {
             console.log(`客户端请求数据全部接收完毕`);
         });
     }
+    response.writeHead(200, { 'content-type': 'text/plain; charset=utf-8', 'Access-Control-Allow-Origin': 'http://localhost' });
+    response.write('你好,node前后已打通');
     response.end();
 }).listen(8888, '127.0.0.1', () => {
     console.log(`服务端开始监听 `);
@@ -99,7 +101,7 @@ server.on('error', err => {
  */
 
 /**
- * HTTP SeverResponse类
+ * HTTP SeverResponse类 服务端响应流
  * @event close end方法调用时触发
  * @event finish 当响应已被发送时触发（不意味着客户端已接收到任何东西）,此后响应对象不再触发任何事件
  * 
@@ -111,10 +113,21 @@ server.on('error', err => {
  * @method getHeaders @return [object] 返回当前响应头信息
  * @method hasHeader(name) @return [boolean] 判断是否含有一个已入队列但尚未发送到客户端的响应头
  * @method removeHeader(name) 从隐式发送的队列中移除一个响应头
- * @method writeHeader(statusCode,[statusMessage],[headers]) 优先级高于setHeader 并且在write()和end()之后调用，否则会切换到隐式响应头
+ * @method writeHeader(statusCode,[statusMessage],[headers]) 优先级高于setHeader 并且在write()和end()之前调用，否则会切换到隐式响应头
  * * * * * @param statusCode [number] 状态码 
  * * * * * @param statusMessage [string] 状态描述
- * * * * * @param headers [object] 响应头
+ * * * * * @param headers [object] 服务端响应头
+ * * * * * * * * * headers = {
+ * * * * * * * * * content-type: 指定内容类型,
+ * * * * * * * * * location: 用于将客户端重定向到另一个url地址,
+ * * * * * * * * * content-disposition: 用于指定一个被下载的文件名,
+ * * * * * * * * * content-length: 用于指定服务端响应内容的字节数,
+ * * * * * * * * * set-cookie: 用于在客户端创建一个cookie
+ * * * * * * * * * content-encoding: 服务器端相应内容的编码方式
+ * * * * * * * * * Cache-Control:用于开启缓存机制
+ * * * * * * * * * Expires: 用于指定缓存过期时间
+ * * * * * * * * * Etag: 用于指定当服务端响应内容没有变化时不重新下载数据
+ * * * * * * * * * }
  * * * * *
  * @method write(chunk,[encoding],[callback]) 发送一块响应主体
  * * * * * @param chunk [string|buffer]

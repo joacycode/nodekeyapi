@@ -1,10 +1,12 @@
 const fs = require('fs');
+const child_process = require('child_process');
 /**
  * node process 方法事件属性
  * @event beforeExit 非exit代替事件 事件循环数组已空，且无事件进来
  * @event disconnet 如果进程是由IPCchannel方式创建，当IPC channel关闭时触发
  * @event exit  exit()被调用或者事件循环数组中没有额外工作 callback中只支持同步操作
  * @event message IPC channel 子进程收到父进程的消息 父进程使用child.send()发送
+ * * * * callback(m,setHandle) @param m 子/父进程中收到的消息  @param setHandle send方法中的服务器对象或者sokcet端口对象
  * @event uncaughtException 进程出现未被捕捉的异常触发，可指定对所有进程的异常默认处理，避免进程异常退出
  * @event warning
  * @event signal Events 信号事件
@@ -34,6 +36,8 @@ const fs = require('fs');
  * * * * * 事件轮询随后的ticks调用，会在任何I/O事件（包括定时器）之前运行
  * * * * *
  * @method send(msg,[sendHandle],[options],[callback]) 父子进程建立IPC通道后，子进程发送消息到父进程
+ * * * * * @param msg 指定需要发送的数据
+ * * * * * @param sendHandle 当收到对方发送的消息后执行的回调 或者 服务器对象或者socket端口对象
  * @method umask([mask]) 读取或者修改node应用程序进程的文件权限掩码，子进程集成父进程的文件权限掩码
  * * * * * @param mask 指定修改后的文件权限掩码（0777），返回当前的码或者指定参数后返回修改前的码
  * * * * *
@@ -101,12 +105,14 @@ process.on("uncaughtException", err => {
 const time_two = process.hrtime(time_one);
 console.log(`hrtime one took ${time_one[0]*1e9 + time_one[1]} nanoseconds`);
 console.log(`hrtime two took ${time_two[0]*1e9 + time_two[1]} nanoseconds`);
+
+
 /**
  * node child_process类
- * @event close 子进程的stdio流被关闭时触发
+ * @event close 子进程的所有stdio流被关闭时触发 callback(code,singal)
  * @event disconnect 父进程：child.disconnect() 子进程：process.disconnect()后触发此事件
  * @event error 错误事件 1.进程无法被衍生 2.进程无法被杀死 3.向子进程发送信息失败
- * @event exit 子进程结束后会触发‘exit’事件
+ * @event exit 子进程结束后会触发‘exit’事件，未必触发close, callback(code,singal)
  * @event message 父进程收到子进程的消息 子进程使用process.send()发送
  * 
  * @method disconnect() 关闭父进程与子进程之间的 IPC 通道
@@ -123,24 +129,11 @@ console.log(`hrtime two took ${time_two[0]*1e9 + time_two[1]} nanoseconds`);
  */
 
 
-/**
- * spawn创建子进程实例
- */
-
-
-/**
- * fork创建子进程实例
- */
-
-
-/**
- * exec创建子进程实例
- */
-
 
 /**
  * execFile创建子进程实例
  */
+
 
 
 /**

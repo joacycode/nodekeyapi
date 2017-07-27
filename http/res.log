@@ -1,0 +1,5 @@
+客户端请求方法：POST
+客户端请求url的参数字符串：/
+客户端请求头对象：{"host":"localhost:8888","connection":"keep-alive","content-length":"22","cache-control":"max-age=0","origin":"null","upgrade-insecure-requests":"1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36","content-type":"application/x-www-form-urlencoded","accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8","accept-encoding":"gzip, deflate, br","accept-language":"zh-CN,zh;q=0.8,en;q=0.6","cookie":"csrfToken=yc1bQjgRu2Lsbx5LVrNnVTd-"}
+客户端请求http版本：1.1
+服务端接收到的表单数据:my name is xzhang and my age is 27

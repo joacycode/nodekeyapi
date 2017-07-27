@@ -1,1 +1,6 @@
-nodejs process
+子进程当前的工作目录为/Users/xzhang/shell/gits/nodekeyapi/process/test
+0 : /usr/local/bin/node
+1 : /Users/xzhang/shell/gits/nodekeyapi/process/test/child_1.js
+2 : one
+3 : two
+4 : three

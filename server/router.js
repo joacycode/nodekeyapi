@@ -9,14 +9,14 @@ handler['/upload'] = requestHandler.handlers.upload;
 handler['/show'] = requestHandler.handlers.show;
 
 // 根据请求的pathname 执行映射的方法
-const nodeRoute = (pathname, response, postdata) => {
-	if (typeof handler[pathname] === 'function'){
-		return handler[pathname](response, postdata);
-	}else{
-		console.log('No request handler for: ' + pathname);
-		response.writeHeader(404,{'Content-type':'text/plain'});
-		response.write('404 NOT FOUND');
-		response.end();
-	}
+const nodeRoute = (pathname, postdata, response) => {
+    if (typeof handler[pathname] === 'function') {
+        return handler[pathname](response, postdata);
+    } else {
+        console.log('No request handler for: ' + pathname);
+        response.writeHeader(404, { 'Content-type': 'text/plain' });
+        response.write('404 NOT FOUND');
+        response.end();
+    }
 };
 exports.nodeRoute = nodeRoute;

@@ -54,6 +54,7 @@ const fs = require('fs');
  * @event end 当客户端连接被关闭触发 callback()
  * @event error TCP服务于客户建立连接发生错误或通信过程中发生错误
  * @event lookup
+ * @event timeout 超时事件
  * 
  * @method address()
  * @method connect(port,[host],[connectListener]) TCP客户端连接TCP服务端

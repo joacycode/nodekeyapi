@@ -8,11 +8,11 @@
 </head>
 
 <body>
-    <form id="form1" method="POST" action="http://localhost:8888">
+    <!-- <form id="form1" method="POST" action="http://localhost:8888">
         <input type="text" name="myname" placeholder="name" value=""><br/>
         <input type="number" name="myage" placeholder="age" value="">
         <input type="submit" value="提交">
-    </form>
+    </form> -->
     <input type="button" value="获取数据" onclick="getData()">
     <div id="showhere"></div>
     <script>
@@ -22,7 +22,7 @@
             xhr.onreadystatechange = () => {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
-                        document.getElementById("showhere").innerHTML = xhr.responseText;
+                        document.write(xhr.responseText);
                     }
                 }
             };

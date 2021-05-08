@@ -7,7 +7,7 @@ const http = require('http');
  * http.request(options,[callback]) 向其他网站发送请求数据
  * @param options <Object|String|URL> 指定请求的目标地址以及相关配置
  * * * * * options <Object> = { protocol,host,hostname,family,port,localAdrress,socketPath,method,path,headers,auth,agent,timeout,createConnection }
- * @param callback(response) > @param response http.IncomingMessage对象,利用该对象读取响应流数据
+ * @param callback(response) > @param clinetResponse http.IncomingMessage对象,利用该对象读取响应流数据
  * @return 返回ClientRequest类实例,代表一个客户端请求,可写流
  * 
  * 事件方法属性
